@@ -41,12 +41,16 @@ const TestimonialsSection = () => {
     <section className="relative py-32 px-6 overflow-hidden bg-black">
       {/* FloatingLines Background */}
       <div className="absolute inset-0 opacity-20">
-        <FloatingLines />
+        <FloatingLines 
+        linesGradient={['#ffffff', '#cccccc']}
+        topWavePosition={0} 
+        middleWavePosition={'50%'}
+        />
       </div>
       
       {/* DotGrid Background */}
       <div className="absolute inset-0 opacity-10">
-        <DotGrid />
+        <DotGrid style={{}} />
       </div>
       
       {/* Gradient Overlays */}

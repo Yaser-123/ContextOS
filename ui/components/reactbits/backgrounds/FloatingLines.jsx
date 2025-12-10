@@ -344,8 +344,9 @@ export default function FloatingLines({
     if (linesGradient && linesGradient.length > 0) {
       const stops = linesGradient.slice(0, MAX_GRADIENT_STOPS);
       uniforms.lineGradientCount.value = stops.length;
+      const stopsArray = Array.isArray(stops) ? stops : (typeof stops === 'string' ? stops.split(',') : []);
 
-      stops.forEach((hex, i) => {
+      stopsArray.forEach((hex, i) => {
         const color = hexToVec3(hex);
         uniforms.lineGradient.value[i].set(color.x, color.y, color.z);
       });

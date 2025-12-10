@@ -6,6 +6,7 @@ import TiltedCard from '@/components/TiltedCard'
 import { Camera, Brain, Workflow, Sparkles } from 'lucide-react'
 import '@/components/reactbits/text-animation/ShinyText.css'
 import '@/components/TiltedCard.css'
+import React, { ReactNode } from 'react';
 
 const HowItWorksSection = () => {
   const steps = [
