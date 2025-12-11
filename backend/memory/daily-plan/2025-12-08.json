@@ -9,7 +9,7 @@
       "status": "pending",
       "source": "test-pipeline",
       "taskNumber": 1,
-      "completed": false
+      "completed": true
     },
     {
       "title": "Deploy the new feature to production",
@@ -38,7 +38,7 @@
       "status": "pending",
       "source": "mail.google.com",
       "taskNumber": 4,
-      "completed": false
+      "completed": true
     },
     {
       "title": "Take exam by December 31, 2025",
@@ -78,6 +78,6 @@
   "metadata": {
     "totalTasks": 6,
     "highPriorityCount": 4,
-    "normalizedAt": "2025-12-09T19:16:26.325Z"
+    "normalizedAt": "2025-12-11T08:37:07.152Z"
   }
 }

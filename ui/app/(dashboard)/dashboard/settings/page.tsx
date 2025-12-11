@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
 import { loadSettings, saveSettings, type Settings } from "@/lib/settings";
 import { useToast } from "@/components/ui/use-toast";
+import { refreshApiSettings } from '@/lib/api';
 
 export default function SettingsPage() {
   const [togetherKey, setTogetherKey] = useState("");
@@ -48,10 +49,19 @@ export default function SettingsPage() {
         serverUrl: serverUrl,
       });
       
+      // Clear cache so next API calls use new URL
+      refreshApiSettings();
+      
       toast({
         title: "Success",
-        description: "Settings saved successfully!",
+        description: "Settings saved successfully! Reloading page...",
       });
+      
+      // Hard reload to clear all caches (including module/component caches)
+      setTimeout(() => {
+        window.location.href = window.location.href;
+      }, 1000);
+      
     } catch (error) {
       console.error("Failed to save settings:", error);
       toast({
@@ -59,7 +69,6 @@ export default function SettingsPage() {
         description: "Failed to save settings",
         variant: "destructive",
       });
-    } finally {
       setIsSaving(false);
     }
   };

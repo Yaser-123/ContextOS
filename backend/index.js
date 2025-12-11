@@ -12,7 +12,7 @@ const { startWatcher } = require('./fileWatcher');
 const { handleChatbot, clearChatHistory } = require('./chatbot/chatbotHandler');
 
 const app = express();
-const PORT = 8000;
+const PORT = 5000;
 
 // Middleware
 app.use(cors());

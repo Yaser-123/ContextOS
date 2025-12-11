@@ -27,7 +27,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { DailyPlanResponse, DailyPlan, toggleTaskCompletion, generateMissingPlans, getDailyPlan } from '@/lib/api';
+import { DailyPlanResponse, DailyPlan, toggleTaskCompletion, generateMissingPlans, getDailyPlan, getAvailableDates } from '@/lib/api';
 
 interface DailyPlannerClientProps {
   initialPlanResponse: DailyPlanResponse | null;
@@ -41,9 +41,67 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
   const [currentPlan, setCurrentPlan] = useState<DailyPlan | null>(initialPlanResponse?.plan || null);
   const [selectedDate, setSelectedDate] = useState(initialSelectedDate);
   const [dates, setDates] = useState(availableDates);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch initial data on mount
+  useEffect(() => {
+    async function fetchInitialData() {
+      try {
+        console.log('[Dashboard] Fetching initial data...');
+        
+        // First get available dates to see what data we have
+        const datesData = await getAvailableDates();
+        console.log('[Dashboard] Dates data:', datesData);
+        console.log('[Dashboard] Available dates array:', datesData?.dailyPlanDates);
+        console.log('[Dashboard] Needs generation:', datesData?.needsGeneration);
+        setDates(datesData);
+        
+        // If no dates data, stop here
+        if (!datesData || !datesData.dailyPlanDates) {
+          console.error('[Dashboard] No dates data received from backend');
+          setIsLoading(false);
+          return;
+        }
+        
+        // Determine which date to load
+        let dateToLoad = selectedDate;
+        
+        // If today has no plan but there are other dates available, use the most recent
+        if (datesData.dailyPlanDates.length > 0) {
+          const latestDate = datesData.dailyPlanDates[datesData.dailyPlanDates.length - 1];
+          
+          // Check if today's date is in the available dates
+          const todayHasPlan = datesData.dailyPlanDates.includes(selectedDate);
+          
+          if (!todayHasPlan) {
+            console.log('[Dashboard] No plan for today, showing most recent date:', latestDate);
+            dateToLoad = latestDate;
+            setSelectedDate(latestDate);
+          }
+        }
+        
+        // Load the plan for the determined date
+        console.log('[Dashboard] Loading plan for date:', dateToLoad);
+        const planResponse = await getDailyPlan(dateToLoad);
+        console.log('[Dashboard] Plan response:', planResponse);
+        
+        if (planResponse?.exists && planResponse.plan) {
+          setCurrentPlan(planResponse.plan);
+        } else {
+          console.log('[Dashboard] No plan available for date:', dateToLoad);
+          setCurrentPlan(null);
+        }
+      } catch (error) {
+        console.error('[Dashboard] Error fetching initial data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    fetchInitialData();
+  }, []);
 
   const handleGenerateMissingPlans = async () => {
-    // Check if there are missing plans
     if (!dates?.needsGeneration) {
       alert('All daily plans are up to date! No generation needed.');
       return;
@@ -55,7 +113,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
 
       if (result?.ok) {
         alert(`Successfully generated ${result.generated?.length || 0} daily plan(s)!`);
-        // Refresh the page to show the new plans
         router.refresh();
       } else {
         console.error('Failed to generate plans');
@@ -72,7 +129,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
   const handleRegenerateTodayPlan = async () => {
     setIsGenerating(true);
     try {
-      // Get today's date
       const now = new Date();
       const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
       
@@ -83,12 +139,10 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
 
       if (response.ok) {
         alert('Today\'s plan has been regenerated with latest context!');
-        // If we're viewing today, refresh the current plan
         if (selectedDate === today) {
           const planResponse = await getDailyPlan(today);
           setCurrentPlan(planResponse?.plan || null);
         }
-        // Refresh the page to update available dates
         router.refresh();
       } else {
         console.error('Failed to regenerate today\'s plan');
@@ -132,7 +186,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
     const newCompleted = !currentCompleted;
     
     try {
-      // Optimistic UI update
       setCurrentPlan(prevPlan => {
         if (!prevPlan) return prevPlan;
         
@@ -147,14 +200,11 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
         };
       });
 
-      // Call API to persist the change
       const updatedPlan = await toggleTaskCompletion(taskNumber, newCompleted, currentPlan.date);
       
       if (updatedPlan) {
-        // Update with the response from server
         setCurrentPlan(updatedPlan);
       } else {
-        // Revert on failure
         setCurrentPlan(prevPlan => {
           if (!prevPlan) return prevPlan;
           
@@ -172,7 +222,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
       }
     } catch (error) {
       console.error('Error toggling task:', error);
-      // Revert on error
       setCurrentPlan(prevPlan => {
         if (!prevPlan) return prevPlan;
         
@@ -189,7 +238,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
     }
   };
 
-  // Format selected date
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr + 'T00:00:00');
     return date.toLocaleDateString('en-US', { 
@@ -199,6 +247,18 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
       day: 'numeric' 
     });
   };
+
+  // Show loading state while fetching
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <RefreshCw className="h-8 w-8 text-blue-400 animate-spin mx-auto" />
+          <p className="text-slate-400 text-lg">Loading your daily plan...</p>
+        </div>
+      </div>
+    );
+  }
 
   const dateStr = formatDate(selectedDate);
   const currentIndex = dates?.dailyPlanDates?.indexOf(selectedDate) ?? -1;
@@ -210,7 +270,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6">
         <div className="max-w-6xl mx-auto space-y-6">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,7 +284,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
             <p className="text-slate-400 text-lg">{dateStr}</p>
           </motion.div>
 
-          {/* Status Info */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -258,7 +316,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
               </Alert>
             )}
 
-            {/* Available dates info */}
             {dates?.dailyPlanDates && dates.dailyPlanDates.length > 0 && (
               <div className="text-center text-slate-400">
                 <p>Available dates: {dates.dailyPlanDates.join(', ')}</p>
@@ -266,7 +323,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
             )}
           </motion.div>
 
-          {/* Generate Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -308,20 +364,17 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
 
   const plan = currentPlan!;
 
-  // Mock stats data
   const dayStats = [
     { icon: Battery, label: 'Energy Level', value: 'High', color: 'from-green-500 to-emerald-500', emoji: '🌤️' },
     { icon: CheckCircle2, label: 'Completed Today', value: '8/12', color: 'from-blue-500 to-cyan-500', emoji: '📊' },
     { icon: Brain, label: 'Focus Time', value: '9-11 AM', color: 'from-purple-500 to-pink-500', emoji: '⚡' }
   ];
 
-  // Priority colors for task bars
   const priorityColors = ['border-blue-500', 'border-purple-500', 'border-cyan-500', 'border-pink-500', 'border-green-500'];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6">
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -341,9 +394,7 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
               <p className="text-slate-400 text-lg">{dateStr}</p>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex gap-3">
-              {/* Generate Missing Plans Button - only show if there are missing plans */}
               {dates?.needsGeneration && (
                 <div className="relative group">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl opacity-20 group-hover:opacity-40 blur transition duration-300" />
@@ -367,7 +418,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
                 </div>
               )}
 
-              {/* Regenerate Today's Plan Button - always show for current date */}
               {(() => {
                 const now = new Date();
                 const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -402,7 +452,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
             </div>
           </div>
 
-          {/* Date Navigation */}
           {dates?.dailyPlanDates && dates.dailyPlanDates.length > 1 && (
             <div className="space-y-3">
               <div className="flex items-center justify-center gap-4">
@@ -436,7 +485,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
                 </Button>
               </div>
 
-              {/* Today's plan info tip */}
               {(() => {
                 const now = new Date();
                 const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -458,7 +506,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
           )}
         </motion.div>
 
-        {/* Your Day at a Glance Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -475,7 +522,6 @@ export function DailyPlannerClient({ initialPlanResponse, availableDates, initia
                 transition={{ delay: 0.1 + index * 0.05 }}
                 className="relative p-4 rounded-xl bg-gradient-to-br from-slate-900/80 to-slate-800/60 border border-slate-700/50 backdrop-blur-xl hover:border-slate-600 transition-all group overflow-hidden"
               >
-                {/* Glow effect */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
                 
                 <div className="relative flex items-center gap-3">

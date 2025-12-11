@@ -1,31 +1,18 @@
-import { getAvailableDates, getDailyPlan } from '@/lib/api';
+'use client';
+
 import { DailyPlannerClient } from '@/components/DailyPlannerClient';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-export default async function DashboardPage() {
-  // Get all available dates
-  const availableDates = await getAvailableDates();
-  
-  // Determine which date to show (latest daily plan or today)
+export default function DashboardPage() {
+  // Calculate today's date
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   
-  let selectedDate = today;
-  if (availableDates?.dailyPlanDates && availableDates.dailyPlanDates.length > 0) {
-    // Show the most recent daily plan
-    selectedDate = availableDates.dailyPlanDates[availableDates.dailyPlanDates.length - 1];
-  }
-  
-  // Load the plan for selected date
-  const planResponse = await getDailyPlan(selectedDate);
-  
+  // Pass null for initial data - DailyPlannerClient will fetch it client-side
   return (
     <DailyPlannerClient 
-      initialPlanResponse={planResponse} 
-      availableDates={availableDates}
-      initialSelectedDate={selectedDate}
+      initialPlanResponse={null} 
+      availableDates={null}
+      initialSelectedDate={today}
     />
   );
 }

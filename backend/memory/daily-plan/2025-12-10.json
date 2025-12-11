@@ -9,7 +9,7 @@
       "status": "pending",
       "source": "mail.google.com (manual)",
       "taskNumber": 1,
-      "completed": false
+      "completed": true
     },
     {
       "title": "Capstone Week course is due soon",
@@ -18,7 +18,7 @@
       "status": "pending",
       "source": "mail.google.com (manual)",
       "taskNumber": 2,
-      "completed": false
+      "completed": true
     },
     {
       "title": "Wrap up your learning for Ethical and Values-Based Leadership",
@@ -38,7 +38,7 @@
       "status": "pending",
       "source": "mail.google.com",
       "taskNumber": 4,
-      "completed": false
+      "completed": true
     },
     {
       "title": "UiPath Automation Cloud account",
@@ -65,7 +65,7 @@
       "status": "pending",
       "source": "mail.google.com",
       "taskNumber": 7,
-      "completed": false
+      "completed": true
     }
   ],
   "reminders": [
@@ -89,6 +89,6 @@
   "metadata": {
     "totalTasks": 7,
     "highPriorityCount": 3,
-    "normalizedAt": "2025-12-10T16:30:54.067Z"
+    "normalizedAt": "2025-12-11T08:37:10.810Z"
   }
 }

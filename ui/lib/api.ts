@@ -3,7 +3,7 @@
  * Connects Next.js frontend to Express backend
  */
 
-import { getBaseUrl } from './settings';
+import { getBaseUrl, clearSettingsCache } from './settings';
 
 interface Task {
   taskNumber: number;
@@ -37,15 +37,19 @@ export type { DailyPlan, DailyPlanResponse, Task, FocusTask };
 
 /**
  * Get the backend URL dynamically from settings
- * Falls back to default localhost:8000 if not configured
+ * Always uses the stored server URL from localStorage
+ * Only call this from client-side code (useEffect, event handlers)
  */
-async function getBackendUrl(): Promise<string> {
-  try {
-    return await getBaseUrl();
-  } catch (error) {
-    console.error('Error loading backend URL from settings, using default:', error);
-    return 'http://localhost:8000';
+function getBackendUrl(): string {
+  // Ensure we're in the browser
+  if (typeof window === 'undefined') {
+    console.warn('[API] getBackendUrl called on server side, using default');
+    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
   }
+  
+  const url = getBaseUrl();
+  console.log('[API] Using backend URL:', url);
+  return url;
 }
 
 /**
@@ -55,11 +59,12 @@ async function getBackendUrl(): Promise<string> {
  */
 export async function captureContext(content: string): Promise<{ ok: boolean; error?: string; ignored?: boolean }> {
   try {
-    const backendUrl = await getBackendUrl();
+    const backendUrl = getBackendUrl();
     const response = await fetch(`${backendUrl}/api/context`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
       },
       body: JSON.stringify({
         source: 'manual',
@@ -87,19 +92,22 @@ export async function captureContext(content: string): Promise<{ ok: boolean; er
  */
 export async function getDailyPlan(dateStr: string): Promise<DailyPlanResponse | null> {
   try {
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(
-      `${backendUrl}/api/daily-plan?date=${dateStr}`,
-      {
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const backendUrl = getBackendUrl();
+    const fullUrl = `${backendUrl}/api/daily-plan?date=${dateStr}`;
+    console.log('[API] Fetching daily plan from:', fullUrl);
+    
+    const response = await fetch(fullUrl, {
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
 
     if (!response.ok) {
-      console.error(`[API] Failed to fetch daily plan: ${response.status}`);
+      console.error(`[API] Failed to fetch daily plan: ${response.status} ${response.statusText}`);
+      const text = await response.text();
+      console.error('[API] Response body:', text);
       return null;
     }
 
@@ -120,6 +128,7 @@ export async function getTodayPlan(): Promise<DailyPlanResponse | null> {
   const now = new Date();
   // Use local date instead of UTC to avoid timezone issues
   const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  console.log('[API] Fetching today\'s plan for date:', dateStr);
   return getDailyPlan(dateStr);
 }
 
@@ -130,20 +139,23 @@ export async function getTodayPlan(): Promise<DailyPlanResponse | null> {
  */
 export async function generateDailyPlan(dateStr: string): Promise<DailyPlan | null> {
   try {
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(
-      `${backendUrl}/api/daily-plan/generate?date=${dateStr}`,
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const backendUrl = getBackendUrl();
+    const fullUrl = `${backendUrl}/api/daily-plan/generate?date=${dateStr}`;
+    console.log('[API] Generating daily plan at:', fullUrl);
+    
+    const response = await fetch(fullUrl, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
 
     if (!response.ok) {
-      console.error(`[API] Failed to generate daily plan: ${response.status}`);
+      console.error(`[API] Failed to generate daily plan: ${response.status} ${response.statusText}`);
+      const text = await response.text();
+      console.error('[API] Response body:', text);
       return null;
     }
 
@@ -161,23 +173,28 @@ export async function generateDailyPlan(dateStr: string): Promise<DailyPlan | nu
  */
 export async function getAvailableDates() {
   try {
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(
-      `${backendUrl}/api/daily-plan/available-dates`,
-      {
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const backendUrl = getBackendUrl();
+    const fullUrl = `${backendUrl}/api/daily-plan/available-dates`;
+    console.log('[API] Fetching available dates from:', fullUrl);
+    
+    const response = await fetch(fullUrl, {
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
 
     if (!response.ok) {
-      console.error(`[API] Failed to get available dates: ${response.status}`);
+      console.error(`[API] Failed to get available dates: ${response.status} ${response.statusText}`);
+      const text = await response.text();
+      console.error('[API] Response body:', text);
       return null;
     }
 
-    return await response.json();
+    const data = await response.json();
+    console.log('[API] Received available dates:', data);
+    return data;
   } catch (error) {
     console.error('[API] Error getting available dates:', error);
     return null;
@@ -190,20 +207,21 @@ export async function getAvailableDates() {
  */
 export async function generateMissingPlans() {
   try {
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(
-      `${backendUrl}/api/daily-plan/generate-missing`,
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const backendUrl = getBackendUrl();
+    const fullUrl = `${backendUrl}/api/daily-plan/generate-missing`;
+    console.log('[API] Generating missing plans at:', fullUrl);
+    
+    const response = await fetch(fullUrl, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
 
     if (!response.ok) {
-      console.error(`[API] Failed to generate missing plans: ${response.status}`);
+      console.error(`[API] Failed to generate missing plans: ${response.status} ${response.statusText}`);
       return null;
     }
 
@@ -227,21 +245,22 @@ export async function toggleTaskCompletion(
   date: string
 ): Promise<DailyPlan | null> {
   try {
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(
-      `${backendUrl}/api/tasks/${taskId}`,
-      {
-        method: 'PATCH',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ completed, date }),
-      }
-    );
+    const backendUrl = getBackendUrl();
+    const fullUrl = `${backendUrl}/api/tasks/${taskId}`;
+    console.log('[API] Toggling task completion at:', fullUrl);
+    
+    const response = await fetch(fullUrl, {
+      method: 'PATCH',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      },
+      body: JSON.stringify({ completed, date }),
+    });
 
     if (!response.ok) {
-      console.error(`[API] Failed to toggle task completion: ${response.status}`);
+      console.error(`[API] Failed to toggle task completion: ${response.status} ${response.statusText}`);
       return null;
     }
 
@@ -251,4 +270,13 @@ export async function toggleTaskCompletion(
     console.error('[API] Error toggling task completion:', error);
     return null;
   }
+}
+
+/**
+ * Force refresh the settings cache
+ * Call this after updating server URL in settings
+ */
+export function refreshApiSettings(): void {
+  clearSettingsCache();
+  console.log('[API] Settings cache cleared, next request will use updated URL');
 }
