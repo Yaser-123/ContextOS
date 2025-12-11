@@ -9,7 +9,7 @@ export interface Settings {
   serverUrl: string;
 }
 
-const DEFAULT_SERVER_URL = 'http://localhost:8000';
+const DEFAULT_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 // Cache settings in memory to avoid repeated API calls
 let settingsCache: Settings | null = null;
