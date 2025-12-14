@@ -75,7 +75,7 @@ app.post('/api/context', async (req, res) => {
     
     // 6. Trigger Kestra workflow for additional processing
     try {
-      const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Yaser@123').toString('base64');
+      const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Your_Password').toString('base64');
       
       // Use webhook endpoint with the webhook key defined in the flow
       const kestraResponse = await fetch("http://localhost:8080/api/v1/executions/webhook/contextos/context_parsing_flow/context_webhook", {
