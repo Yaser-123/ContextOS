@@ -1,5 +1,3 @@
-
-
 <p align="center">
   <img 
     src="https://github.com/Yaser-123/ContextOS/blob/main/ui/public/assets/fav.png" 
@@ -11,7 +9,7 @@
 
 # ContextOS - AI-Powered Context Management System
 
-**Built for Avengers 2025 Hackathon | Competing for ALL Sponsor Prizes**
+### Built for Avengers 2025 Hackathon | Competing for ALL Sponsor Prizes
 
 A comprehensive system that automatically captures, analyzes, and organizes your digital context across multiple platforms. ContextOS transforms raw screenshots and content into intelligent daily plans using AI-powered task extraction and workflow orchestration.
 
@@ -73,7 +71,7 @@ This implementation satisfies the requirement by **explicitly using Oumi's reinf
 - **Edge-Ready**: Server-side rendering with performance optimization
 - **Production Configuration**: Environment variables and build settings configured
 
-## 🐰 The Captain Code Award ($1,000) - CodeRabbit Integration
+### 🐰 The Captain Code Award ($1,000) - CodeRabbit Integration
 
 **Requirement**: Demonstrate CodeRabbit for PR reviews and code quality
 
@@ -298,7 +296,7 @@ cline contextos sync-kestra
 
 ## 📁 Repository Structure
 
-```
+```text
 ContextOS/
 ├── ui/                     # Next.js frontend (Vercel-ready)
 │   ├── components/
@@ -360,7 +358,7 @@ ContextOS/
 
 - **GitHub**: [Yaser-123/ContextOS](https://github.com/Yaser-123/ContextOS)
 - **Live Demo**: [http://contextoperatingsystem.vercel.app/](http://contextoperatingsystem.vercel.app/)
-- **Video**: https://youtu.be/4KfiKMZ28po
+- **Video**: [https://youtu.be/4KfiKMZ28po](https://youtu.be/4KfiKMZ28po)
 
 ---
 
