@@ -5,7 +5,7 @@
  */
 
 async function testTrigger() {
-  const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Yaser@123').toString('base64');
+  const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Your_Password').toString('base64');
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Basic ${kestraAuth}`
