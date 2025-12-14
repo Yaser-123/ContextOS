@@ -10,7 +10,7 @@ const path = require('path');
 
 const KESTRA_URL = process.env.KESTRA_URL || 'http://localhost:8080';
 const KESTRA_USER = process.env.KESTRA_USER || '1ammar.yaser@gmail.com';
-const KESTRA_PASSWORD = process.env.KESTRA_PASSWORD || 'Yaser@123';
+const KESTRA_PASSWORD = process.env.KESTRA_PASSWORD || 'Your_Password';
 const FLOW_FILE = path.join(__dirname, 'flows', 'context-parsing-flow.yaml');
 
 async function uploadFlow() {
