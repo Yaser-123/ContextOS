@@ -4,7 +4,7 @@ const path = require("path");
 // Add your Kestra credentials here
 const KESTRA_URL = "http://localhost:8080";
 const KESTRA_USERNAME = "1ammar.yaser@gmail.com"; // Replace with your username
-const KESTRA_PASSWORD = "Yaser@123"; // Replace with your password
+const KESTRA_PASSWORD = "Your_Password"; // Replace with your password
 
 async function collectAndSummarizeDailyPlans() {
   const folder = path.join(process.cwd(), "./backend/memory/daily-plan");
