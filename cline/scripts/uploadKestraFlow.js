@@ -5,7 +5,7 @@ const axios = require("axios");
 const KESTRA_URL = "http://localhost:8080";
 // Note: In a production setting, these should be environment variables
 const KESTRA_USERNAME = "1ammar.yaser@gmail.com"; 
-const KESTRA_PASSWORD = "Yaser@123"; 
+const KESTRA_PASSWORD = "Your_Password"; 
 const FLOW_FILE_PATH = "kestra/flows/context_summarizer_flow.yaml"; // Path to your YAML file
 
 async function uploadFlow() {
