@@ -7,7 +7,7 @@
 async function testWebhook() {
   console.log('🧪 Testing Kestra Webhook Directly\n');
   
-  const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Yaser@123').toString('base64');
+  const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Your_Password').toString('base64');
   
   const payload = {
     content: "This is a direct webhook test to verify Kestra integration is working properly.",
