@@ -1,0 +1,19 @@
+Here's a summary of the daily plans:
+
+**2025-12-08:**
+*   **Summary:** Focus on high-priority tasks.
+*   **Key Tasks:** Completed marketing proposal and redeemed a voucher. Pending tasks include deploying a new feature, contacting John at Microsoft, and preparing for DP-600/700 exams.
+*   **Reminders:** Call John at Microsoft, Redeem voucher by 12/10.
+*   **Schedule Suggestions:** Morning for marketing/deployment, afternoon for contacting John, evening for exam prep.
+
+**2025-12-09:**
+*   **Summary:** Complete high-priority tasks for today.
+*   **Key Tasks:** Numerous high-priority tasks are pending, including completing the marketing proposal, database migration, updating Jira tickets, and finishing API documentation.
+*   **Reminders:** Update Jira tickets, complete marketing proposal, schedule product demo for Dec 16.
+*   **Schedule Suggestions:** Morning for marketing/Jira/demo scheduling, afternoon for database migration and API documentation.
+
+**2025-12-10:**
+*   **Summary:** Complete high-priority tasks, focusing on Capstone Week and learning wrap-up.
+*   **Key Tasks:** Completed learning wrap-up and Capstone Week course. Pending task is to wrap up learning for "Ethical and Values-Based Leadership."
+*   **Reminders:** Review UiPath setup, ensure preview features are enabled, learn Agent fundamentals.
+*   **Schedule Suggestions:** Morning for preparation/UiPath setup, afternoon for preview features/agent fundamentals, evening for learning wrap-up.

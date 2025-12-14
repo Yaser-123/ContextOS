@@ -1,5 +1,206 @@
-{"prompt": "I had a meeting with John from Microsoft about integrating their APIs. Also created two tasks: finish proposal and schedule follow-up.", "ideal": "{\"summary\": \"Meeting about API integration.\", \"tasks\": [\"finish proposal\", \"schedule follow-up\"], \"entities\": {\"people\": [\"John\"], \"companies\": [\"Microsoft\"]}}"}
-{"prompt": "Today: fixed 3 UI bugs, planned onboarding flow, and talked to Sarah from product. Tasks generated: update docs, build prototype.", "ideal": "{\"summary\": \"Product and UI work.\", \"tasks\": [\"update docs\", \"build prototype\"], \"entities\": {\"people\": [\"Sarah\"], \"companies\": []}}"}
-{"prompt": "Brainstormed dashboard design, checked error logs, and coordinated with Raj from DevOps. Tasks: patch server, test retry logic.", "ideal": "{\"summary\": \"Infra + design work.\", \"tasks\": [\"patch server\", \"test retry logic\"], \"entities\": {\"people\": [\"Raj\"], \"companies\": []}}"}
-{"prompt": "Met with Alice at Google to discuss cloud solutions. Created tasks: draft cloud strategy, set up follow-up meeting.", "ideal": "{\"summary\": \"Cloud solutions discussion.\", \"tasks\": [\"draft cloud strategy\", \"set up follow-up meeting\"], \"entities\": {\"people\": [\"Alice\"], \"companies\": [\"Google\"]}}"}
-{"prompt": "Reviewed marketing plan, analyzed user feedback, and spoke with Tom from sales. Tasks: revise marketing plan, prepare sales report.", "ideal": "{\"summary\": \"Marketing and sales review.\", \"tasks\": [\"revise marketing plan\", \"prepare sales report\"], \"entities\": {\"people\": [\"Tom\"], \"companies\": []}}"}
+[
+    {
+        "prompt": "Weekly sync with Emma from Slack regarding platform integrations. Tasks: research API endpoints, document limitations.",
+        "ideal": "{\"summary\": \"Platform integration discussion.\", \"tasks\": [\"research API endpoints\", \"document limitations\"], \"entities\": {\"people\": [\"Emma\"], \"companies\": [\"Slack\"]}}"
+    },
+    {
+        "prompt": "Debugged authentication flow and optimized database queries. Discussed with Mike from engineering. Tasks: refactor auth code, run performance tests.",
+        "ideal": "{\"summary\": \"Technical optimization work.\", \"tasks\": [\"refactor auth code\", \"run performance tests\"], \"entities\": {\"people\": [\"Mike\"], \"companies\": []}}"
+    },
+    {
+        "prompt": "Interviewed a candidate for the frontend role, reviewed pull requests. Tasks: write feedback, merge approved PRs.",
+        "ideal": "{\"summary\": \"Hiring and code review.\", \"tasks\": [\"write feedback\", \"merge approved PRs\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Presented quarterly results to stakeholders. Talked with David from Amazon about partnership. Tasks: update partnership deck, share metrics.",
+        "ideal": "{\"summary\": \"Stakeholder and partnership meeting.\", \"tasks\": [\"update partnership deck\", \"share metrics\"], \"entities\": {\"people\": [\"David\"], \"companies\": [\"Amazon\"]}}"
+    },
+    {
+        "prompt": "Resolved customer escalation, tested new feature. Tasks: write RCA, update test cases.",
+        "ideal": "{\"summary\": \"Customer issue resolution.\", \"tasks\": [\"write RCA\", \"update test cases\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Coordinated with Lisa from IBM on data migration project. Tasks: create migration plan, backup databases.",
+        "ideal": "{\"summary\": \"Data migration coordination.\", \"tasks\": [\"create migration plan\", \"backup databases\"], \"entities\": {\"people\": [\"Lisa\"], \"companies\": [\"IBM\"]}}"
+    },
+    {
+        "prompt": "Refined sprint backlog, paired with Alex on debugging. Tasks: prioritize backlog items, fix critical bug.",
+        "ideal": "{\"summary\": \"Sprint planning and debugging.\", \"tasks\": [\"prioritize backlog items\", \"fix critical bug\"], \"entities\": {\"people\": [\"Alex\"], \"companies\": []}}"
+    },
+    {
+        "prompt": "Demoed new UI to the team, gathered feedback. Tasks: incorporate feedback, plan next iteration.",
+        "ideal": "{\"summary\": \"UI demo and feedback.\", \"tasks\": [\"incorporate feedback\", \"plan next iteration\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Negotiated contract terms with Brian from Oracle. Tasks: finalize contract, send for legal review.",
+        "ideal": "{\"summary\": \"Contract negotiation.\", \"tasks\": [\"finalize contract\", \"send for legal review\"], \"entities\": {\"people\": [\"Brian\"], \"companies\": [\"Oracle\"]}}"
+    },
+    {
+        "prompt": "Trained new team member on deployment process. Tasks: create training material, schedule shadowing.",
+        "ideal": "{\"summary\": \"Onboarding and training.\", \"tasks\": [\"create training material\", \"schedule shadowing\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Analyzed competitor feature from Facebook. Tasks: write competitive analysis, brainstorm responses.",
+        "ideal": "{\"summary\": \"Competitor analysis.\", \"tasks\": [\"write competitive analysis\", \"brainstorm responses\"], \"entities\": {\"people\": [], \"companies\": [\"Facebook\"]}}"
+    },
+    {
+        "prompt": "Monitored system alerts, coordinated with DevOps. Tasks: investigate alerts, update monitoring rules.",
+        "ideal": "{\"summary\": \"System monitoring.\", \"tasks\": [\"investigate alerts\", \"update monitoring rules\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed roadmap with Chloe from Product, aligned on Q3 goals. Tasks: update roadmap, share with engineering.",
+        "ideal": "{\"summary\": \"Roadmap alignment.\", \"tasks\": [\"update roadmap\", \"share with engineering\"], \"entities\": {\"people\": [\"Chloe\"], \"companies\": []}}"
+    },
+    {
+        "prompt": "Researched AWS services for scaling. Tasks: evaluate options, estimate costs.",
+        "ideal": "{\"summary\": \"Cloud scaling research.\", \"tasks\": [\"evaluate options\", \"estimate costs\"], \"entities\": {\"people\": [], \"companies\": [\"AWS\"]}}"
+    },
+    {
+        "prompt": "Fixed payment gateway integration, tested with Stripe. Tasks: deploy fix, verify transactions.",
+        "ideal": "{\"summary\": \"Payment integration fix.\", \"tasks\": [\"deploy fix\", \"verify transactions\"], \"entities\": {\"people\": [], \"companies\": [\"Stripe\"]}}"
+    },
+    {
+        "prompt": "Wrote design docs for new microservice. Discussed with engineering lead. Tasks: review design, start implementation.",
+        "ideal": "{\"summary\": \"Microservice design.\", \"tasks\": [\"review design\", \"start implementation\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Prepared for security audit, reviewed compliance docs. Tasks: address findings, update policies.",
+        "ideal": "{\"summary\": \"Security audit preparation.\", \"tasks\": [\"address findings\", \"update policies\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Met with Sam from Sales team on customer requirements. Tasks: document requirements, prototype solution.",
+        "ideal": "{\"summary\": \"Customer requirements gathering.\", \"tasks\": [\"document requirements\", \"prototype solution\"], \"entities\": {\"people\": [\"Sam\"], \"companies\": []}}"
+    },
+    {
+        "prompt": "Optimized CI/CD pipeline, reduced build times. Tasks: document improvements, share with team.",
+        "ideal": "{\"summary\": \"CI/CD optimization.\", \"tasks\": [\"document improvements\", \"share with team\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Reviewed analytics dashboard with Data team. Tasks: fix data discrepancies, add new metrics.",
+        "ideal": "{\"summary\": \"Analytics review.\", \"tasks\": [\"fix data discrepancies\", \"add new metrics\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Coordinated with external vendor for hardware delivery. Tasks: track shipment, test hardware.",
+        "ideal": "{\"summary\": \"Vendor coordination.\", \"tasks\": [\"track shipment\", \"test hardware\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Participated in industry webinar, networked with peers. Tasks: share insights, follow up with contacts.",
+        "ideal": "{\"summary\": \"Industry webinar participation.\", \"tasks\": [\"share insights\", \"follow up with contacts\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Updated user documentation, fixed typos. Tasks: publish docs, notify users.",
+        "ideal": "{\"summary\": \"Documentation update.\", \"tasks\": [\"publish docs\", \"notify users\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed API rate limits with Twitter developer support. Tasks: adjust throttling, monitor usage.",
+        "ideal": "{\"summary\": \"API rate limit discussion.\", \"tasks\": [\"adjust throttling\", \"monitor usage\"], \"entities\": {\"people\": [], \"companies\": [\"Twitter\"]}}"
+    },
+    {
+        "prompt": "Planned team offsite, researched venues. Tasks: finalize venue, send invites.",
+        "ideal": "{\"summary\": \"Team offsite planning.\", \"tasks\": [\"finalize venue\", \"send invites\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Debugged production issue, rolled back faulty deploy. Tasks: write postmortem, improve rollback process.",
+        "ideal": "{\"summary\": \"Production incident.\", \"tasks\": [\"write postmortem\", \"improve rollback process\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Researched open-source alternatives, compared with paid tools. Tasks: present findings, make recommendation.",
+        "ideal": "{\"summary\": \"Tool evaluation.\", \"tasks\": [\"present findings\", \"make recommendation\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Coached junior developer on best practices. Tasks: create mentoring plan, schedule sessions.",
+        "ideal": "{\"summary\": \"Mentoring and coaching.\", \"tasks\": [\"create mentoring plan\", \"schedule sessions\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed data privacy with legal team. Tasks: update privacy policy, train team.",
+        "ideal": "{\"summary\": \"Data privacy discussion.\", \"tasks\": [\"update privacy policy\", \"train team\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Tested new iPhone app version, reported bugs. Tasks: fix critical bugs, submit update.",
+        "ideal": "{\"summary\": \"Mobile app testing.\", \"tasks\": [\"fix critical bugs\", \"submit update\"], \"entities\": {\"people\": [], \"companies\": [\"Apple\"]}}"
+    },
+    {
+        "prompt": "Discussed server costs with Finance team. Tasks: optimize resource usage, reduce costs.",
+        "ideal": "{\"summary\": \"Cost optimization.\", \"tasks\": [\"optimize resource usage\", \"reduce costs\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Integrated with Zoom for meeting scheduling. Tasks: test integration, update user guide.",
+        "ideal": "{\"summary\": \"Zoom integration.\", \"tasks\": [\"test integration\", \"update user guide\"], \"entities\": {\"people\": [], \"companies\": [\"Zoom\"]}}"
+    },
+    {
+        "prompt": "Reviewed patent application with lawyers. Tasks: provide technical details, respond to queries.",
+        "ideal": "{\"summary\": \"Patent review.\", \"tasks\": [\"provide technical details\", \"respond to queries\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Set up disaster recovery drill, simulated outage. Tasks: document gaps, improve recovery plan.",
+        "ideal": "{\"summary\": \"Disaster recovery drill.\", \"tasks\": [\"document gaps\", \"improve recovery plan\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Collaborated with UX team on wireframes. Tasks: review wireframes, provide feedback.",
+        "ideal": "{\"summary\": \"UX wireframe collaboration.\", \"tasks\": [\"review wireframes\", \"provide feedback\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed SDK launch with Developer Relations. Tasks: prepare release notes, announce launch.",
+        "ideal": "{\"summary\": \"SDK launch planning.\", \"tasks\": [\"prepare release notes\", \"announce launch\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Resolved merge conflicts in large refactor. Tasks: run tests, ensure no regressions.",
+        "ideal": "{\"summary\": \"Code merge resolution.\", \"tasks\": [\"run tests\", \"ensure no regressions\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Analyzed user retention metrics, identified drop-off points. Tasks: propose improvements, A/B test changes.",
+        "ideal": "{\"summary\": \"Retention analysis.\", \"tasks\": [\"propose improvements\", \"A/B test changes\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed support ticket trends with customer service. Tasks: prioritize fixes, improve documentation.",
+        "ideal": "{\"summary\": \"Support ticket analysis.\", \"tasks\": [\"prioritize fixes\", \"improve documentation\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Prepared for conference talk, created slides. Tasks: rehearse talk, gather feedback.",
+        "ideal": "{\"summary\": \"Conference talk preparation.\", \"tasks\": [\"rehearse talk\", \"gather feedback\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed mobile app performance with Android team. Tasks: optimize startup time, reduce crashes.",
+        "ideal": "{\"summary\": \"Mobile performance discussion.\", \"tasks\": [\"optimize startup time\", \"reduce crashes\"], \"entities\": {\"people\": [], \"companies\": [\"Google\"]}}"
+    },
+    {
+        "prompt": "Updated codebase to latest framework version. Tasks: test compatibility, update dependencies.",
+        "ideal": "{\"summary\": \"Framework upgrade.\", \"tasks\": [\"test compatibility\", \"update dependencies\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed partnership opportunities with startup. Tasks: evaluate partnership, schedule next meeting.",
+        "ideal": "{\"summary\": \"Partnership exploration.\", \"tasks\": [\"evaluate partnership\", \"schedule next meeting\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Researched machine learning APIs, compared Google AI and Azure ML. Tasks: choose provider, prototype integration.",
+        "ideal": "{\"summary\": \"ML API research.\", \"tasks\": [\"choose provider\", \"prototype integration\"], \"entities\": {\"people\": [], \"companies\": [\"Google\", \"Microsoft\"]}}"
+    },
+    {
+        "prompt": "Set up new development environment for team. Tasks: automate setup, document process.",
+        "ideal": "{\"summary\": \"Dev environment setup.\", \"tasks\": [\"automate setup\", \"document process\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Analyzed website traffic using Google Analytics. Tasks: identify top pages, improve SEO.",
+        "ideal": "{\"summary\": \"Website traffic analysis.\", \"tasks\": [\"identify top pages\", \"improve SEO\"], \"entities\": {\"people\": [], \"companies\": [\"Google\"]}}"
+    },
+    {
+        "prompt": "Discussed feature prioritization with stakeholders. Tasks: update product backlog, communicate decisions.",
+        "ideal": "{\"summary\": \"Feature prioritization meeting.\", \"tasks\": [\"update product backlog\", \"communicate decisions\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Resolved DNS configuration issue with IT team. Tasks: update DNS records, verify propagation.",
+        "ideal": "{\"summary\": \"DNS issue resolution.\", \"tasks\": [\"update DNS records\", \"verify propagation\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Prepared budget proposal for next quarter. Tasks: finalize numbers, present to management.",
+        "ideal": "{\"summary\": \"Budget planning.\", \"tasks\": [\"finalize numbers\", \"present to management\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Discussed containerization strategy with platform team. Tasks: migrate services, update orchestration.",
+        "ideal": "{\"summary\": \"Containerization strategy.\", \"tasks\": [\"migrate services\", \"update orchestration\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    },
+    {
+        "prompt": "Reviewed customer testimonials for marketing. Tasks: select quotes, update website.",
+        "ideal": "{\"summary\": \"Customer testimonials review.\", \"tasks\": [\"select quotes\", \"update website\"], \"entities\": {\"people\": [], \"companies\": []}}"
+    }
+]

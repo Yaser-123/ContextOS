@@ -1,3 +1,91 @@
+Daily Plan Summaries:
+
+--- 2025-12-08.json ---
+{
+  "date": "2025-12-08",
+  "daySummary": "Focus on high priority tasks",
+  "focusTasks": [
+    {
+      "title": "Complete the marketing proposal",
+      "dueDate": "null",
+      "priority": "high",
+      "status": "pending",
+      "source": "test-pipeline",
+      "taskNumber": 1,
+      "completed": true
+    },
+    {
+      "title": "Deploy the new feature to production",
+      "dueDate": "null",
+      "priority": "high",
+      "status": "pending",
+      "source": "test-pipeline",
+      "taskNumber": 2,
+      "completed": false
+    },
+    {
+      "title": "Contact John at Microsoft about the partnership",
+      "dueDate": "null",
+      "priority": "high",
+      "status": "pending",
+      "source": "test-pipeline",
+      "taskNumber": 3,
+      "completed": false
+    }
+  ],
+  "otherTasks": [
+    {
+      "title": "Redeem voucher by December 10, 2025",
+      "dueDate": "2025-12-10",
+      "priority": "medium",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 4,
+      "completed": true
+    },
+    {
+      "title": "Take exam by December 31, 2025",
+      "dueDate": "2025-12-31",
+      "priority": "low",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 5,
+      "completed": false
+    },
+    {
+      "title": "Prepare to pass DP-600 or DP-700 exams",
+      "dueDate": null,
+      "priority": "high",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 6,
+      "completed": false
+    }
+  ],
+  "reminders": [
+    "Call John at Microsoft",
+    "Redeem voucher by 12/10"
+  ],
+  "scheduleSuggestions": {
+    "morning": [
+      "Complete marketing proposal",
+      "Deploy new feature"
+    ],
+    "afternoon": [
+      "Contact John at Microsoft"
+    ],
+    "evening": [
+      "Prepare for DP-600/DP-700 exam"
+    ]
+  },
+  "metadata": {
+    "totalTasks": 6,
+    "highPriorityCount": 4,
+    "normalizedAt": "2025-12-14T06:31:13.231Z"
+  }
+}
+
+--- 2025-12-09.json ---
 {
   "date": "2025-12-09",
   "daySummary": "Complete high priority tasks for today.",
@@ -208,3 +296,100 @@
     "normalizedAt": "2025-12-14T06:31:12.666Z"
   }
 }
+
+--- 2025-12-10.json ---
+{
+  "date": "2025-12-10",
+  "daySummary": "Complete high priority tasks with Capstone Week and learning wrap up.",
+  "focusTasks": [
+    {
+      "title": "Wrap up your learning",
+      "dueDate": "2025-12-10",
+      "priority": "high",
+      "status": "pending",
+      "source": "mail.google.com (manual)",
+      "taskNumber": 1,
+      "completed": true
+    },
+    {
+      "title": "Capstone Week course is due soon",
+      "dueDate": "2025-12-10",
+      "priority": "high",
+      "status": "pending",
+      "source": "mail.google.com (manual)",
+      "taskNumber": 2,
+      "completed": true
+    },
+    {
+      "title": "Wrap up your learning for Ethical and Values-Based Leadership",
+      "dueDate": "2025-12-10",
+      "priority": "high",
+      "status": "pending",
+      "source": "mail.google.com (manual)",
+      "taskNumber": 3,
+      "completed": false
+    }
+  ],
+  "otherTasks": [
+    {
+      "title": "Get ready with your laptop",
+      "dueDate": null,
+      "priority": "low",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 4,
+      "completed": true
+    },
+    {
+      "title": "UiPath Automation Cloud account",
+      "dueDate": null,
+      "priority": "low",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 5,
+      "completed": false
+    },
+    {
+      "title": "Enable preview features in your organisation settings",
+      "dueDate": null,
+      "priority": "low",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 6,
+      "completed": false
+    },
+    {
+      "title": "Understanding of Agent fundamentals",
+      "dueDate": null,
+      "priority": "medium",
+      "status": "pending",
+      "source": "mail.google.com",
+      "taskNumber": 7,
+      "completed": true
+    }
+  ],
+  "reminders": [
+    "Review UiPath setup",
+    "Preview features enabled",
+    "Agent fundamentals learned"
+  ],
+  "scheduleSuggestions": {
+    "morning": [
+      "Get ready",
+      "UiPath setup"
+    ],
+    "afternoon": [
+      "Preview features",
+      "Agent fundamentals"
+    ],
+    "evening": [
+      "Wrap up learning"
+    ]
+  },
+  "metadata": {
+    "totalTasks": 7,
+    "highPriorityCount": 3,
+    "normalizedAt": "2025-12-14T06:32:10.874Z"
+  }
+}
+
