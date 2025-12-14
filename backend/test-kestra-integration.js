@@ -54,7 +54,7 @@ async function testIntegration() {
     
     // Step 2: Check Kestra executions
     console.log('📋 Step 2: Checking Kestra executions...');
-    const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Yaser@123').toString('base64');
+    const kestraAuth = Buffer.from('1ammar.yaser@gmail.com:Your_Password').toString('base64');
     
     const executions = await fetch('http://localhost:8080/api/v1/executions?namespace=contextos&flowId=context_parsing_flow', {
       headers: { 'Authorization': `Basic ${kestraAuth}` }
